@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategory } from "../redux/categorySlice";
 import { NavLink } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 const Categories = () => {
   const categories = useSelector((state) => state.category.items);
@@ -15,14 +16,37 @@ const Categories = () => {
   }, [status, dispatch]);
 
   if (status === "loading") {
-    return <div className='text-4xl text-center m-4 py-10'>Loading...</div>;
+    return (
+      <div>
+        <Skeleton height={60} />
+        <div className='container mx-auto'>
+          <h1 className="text-center text-4xl font-medium m-4">Loading...</h1>
+          <div
+            className='my-10 gap-5 mx-5 grid lg:grid-cols-5 md:grid-cols-3  
+        grid-cols-2 flex justify-between'>
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+            <Skeleton height={100} width='100%' />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (status === "error") {
     return (
-      <div className='text-4xl text-center m-4 py-10'>
+      <>
+      <h1 className='text-4xl text-center m-4'>
         Error: Unable to fetch categories
-      </div>
+      </h1>
+      </>
     );
   }
 

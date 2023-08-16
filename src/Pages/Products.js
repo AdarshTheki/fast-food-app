@@ -1,6 +1,7 @@
 import API from "../axiosConfig";
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 const ProductLists = () => {
   const location = useLocation();
@@ -25,7 +26,27 @@ const ProductLists = () => {
   }, [path]);
 
   const Loading = () => {
-    return <h1 className='text-4xl text-center m-10'>Loading...</h1>;
+    return (
+      <div>
+        <Skeleton height={60} />
+        <div className='container mx-auto'>
+          <div
+            className='my-10 gap-5 mx-5 grid lg:grid-cols-5 md:grid-cols-3  
+        grid-cols-2 flex justify-between'>
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+            <Skeleton height={200} width='100%' />
+          </div>
+        </div>
+      </div>
+    );
   };
 
   const ProductShow = () => {
@@ -37,7 +58,7 @@ const ProductLists = () => {
         <div className='container mx-auto'>
           <div className='justify-center align-center gap-5 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2'>
             {product.map((item) => {
-              const {idMeal, strMeal, strMealThumb} = item
+              const { idMeal, strMeal, strMealThumb } = item;
               return (
                 <NavLink
                   to={`/detail/${idMeal}`}

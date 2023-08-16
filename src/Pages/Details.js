@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import API from "../axiosConfig";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart, updateQuantity } from "../redux/CartSlice";
 
 const Details = () => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart());
+  };
+
   const location = useLocation();
   const path = location.pathname.replace("/detail/", "");
 
@@ -57,12 +68,14 @@ const Details = () => {
                   Category: {product?.strCategory}
                 </span>
               </div>
+              <div>
+                <button
+                  onClick={() => handleAddToCart(product?.idMeal)}
+                  className='rounded px-6 py-2 bg-green-600 text-white'>
+                  Add to Cart
+                </button>
+              </div>
               <div className='flex flex-wrap gap-2 font-medium'>
-                <a
-                  className='rounded px-6 py-2 bg-green-600 text-white'
-                  href="/">
-                  Order Buy
-                </a>
                 <a
                   className='rounded px-6 py-2 bg-orange-600 text-white'
                   href={product?.strSource}>
